@@ -52,7 +52,11 @@ The runtime chatbot is a React-based website that uses a WebSocket API and a Lam
    ```
    export AWS_DEFAULT_REGION=us-east-1
    ```
-3. The demo is using CDK TypesScript for IaC. Please check out how to use [CDK TypeScript](https://docs.aws.amazon.com/cdk/v2/guide/work-with-cdk-typescript.html). 
+3. Install npm modules
+   ```
+   cd cdk-stacks
+   npm install
+   ``` 
 4. CDK bootstrap 
    ```
    cdk bootstrap
