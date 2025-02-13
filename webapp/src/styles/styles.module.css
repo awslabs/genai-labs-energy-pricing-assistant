@@ -1,0 +1,40 @@
+/* Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved. 2023 */
+/* SPDX-License-Identifier: Apache-2.0 */
+.root { 
+  display: grid;
+  place-content: center;
+  place-items: center;
+  row-gap: 20rem;
+  user-select: none;
+}
+
+.disclaimerGroup {
+  display: grid;
+  row-gap: 1rem;
+}
+.disclaimerTitle{
+  font-size: 2rem;
+  text-align: center;
+  color: red;
+  margin-bottom: .5rem;
+}
+
+.disclaimerText {
+  font-size: .75vw;
+  text-align: left;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: .5rem;
+}
+
+.disclaimerButton {
+  display: grid;
+  place-items: center;
+  row-gap: .5rem;
+  width: max-content;
+}
+
+li {
+  margin-left: 10px;
+  list-style-type: circle;
+}

@@ -1,0 +1,112 @@
+[
+    {
+        "station": "Station 1",
+        "address": "2345 Oak Street, Amarillo, TX 79101",
+        "city": "Amarillo, TX",
+        "state": "In Service",
+        "fuelPumps": 12,
+        "parkingSpaces": 30,
+        "accessToMajorRoads": true,
+        "hoursOfOperation": "24 hours"
+    },
+    {
+        "station": "Station 2",
+        "address": "678 Elm Avenue, Corpus Christi, TX 78401",
+        "city": "Corpus Christi, TX",
+        "state": "Maintenance",
+        "fuelPumps": 10,
+        "parkingSpaces": 20,
+        "accessToMajorRoads": true,
+        "hoursOfOperation": "6 AM - 10 PM"
+    },
+    {
+        "station": "Station 3",
+        "address": "1234 Main Street, Lubbock, TX 79401",
+        "city": "Lubbock, TX",
+        "state": "In Service",
+        "fuelPumps": 14,
+        "parkingSpaces": 40,
+        "accessToMajorRoads": true,
+        "hoursOfOperation": "24 hours"
+    },
+    {
+        "station": "Station 4",
+        "address": "5678 Oak Boulevard, El Paso, TX 79901",
+        "city": "El Paso, TX",
+        "state": "Maintenance",
+        "fuelPumps": 8,
+        "parkingSpaces": 15,
+        "accessToMajorRoads": true,
+        "hoursOfOperation": "6 AM - 10 PM"
+    },
+    {
+        "station": "Station 5",
+        "address": "2901 Maple Avenue, Abilene, TX 79601",
+        "city": "Abilene, TX",
+        "state": "In Service",
+        "fuelPumps": 12,
+        "parkingSpaces": 25,
+        "accessToMajorRoads": true,
+        "hoursOfOperation": "24 hours"
+    },
+    {
+        "station": "Station 6",
+        "address": "789 Oak Street, Waco, TX 76701",
+        "city": "Waco, TX",
+        "state": "In Service",
+        "fuelPumps": 10,
+        "parkingSpaces": 18,
+        "accessToMajorRoads": true,
+        "hoursOfOperation": "6 AM - 10 PM"
+    },
+    {
+        "station": "Station 7",
+        "address": "3456 Main Street, Laredo, TX 78040",
+        "city": "Laredo, TX",
+        "state": "Maintenance",
+        "fuelPumps": 14,
+        "parkingSpaces": 35,
+        "accessToMajorRoads": true,
+        "hoursOfOperation": "24 hours"
+    },
+    {
+        "station": "Station 8",
+        "address": "2222 Elm Street, McAllen, TX 78501",
+        "city": "McAllen, TX",
+        "state": "In Service",
+        "fuelPumps": 8,
+        "parkingSpaces": 12,
+        "accessToMajorRoads": true,
+        "hoursOfOperation": "6 AM - 10 PM"
+    },
+    {
+        "station": "Station 9",
+        "address": "9876 Oak Road, Brownsville, TX 78520",
+        "city": "Brownsville, TX",
+        "state": "In Service",
+        "fuelPumps": 12,
+        "parkingSpaces": 22,
+        "accessToMajorRoads": true,
+        "hoursOfOperation": "24 hours"
+    },
+    {
+        "station": "Station 10",
+        "address": "4321 Main Boulevard, Beaumont, TX 77701",
+        "city": "Beaumont, TX",
+        "state": "In Service",
+        "fuelPumps": 10,
+        "parkingSpaces": 16,
+        "accessToMajorRoads": true,
+        "hoursOfOperation": "6 AM - 10 PM"
+    },
+    {
+        "station": "Station 11",
+        "address": "7890 Oak Avenue, Odessa, TX 79761",
+        "city": "Odessa, TX",
+        "state": "In Service",
+        "fuelPumps": 14,
+        "parkingSpaces": 38,
+        "accessToMajorRoads": true,
+        "hoursOfOperation": "24 hours"
+    }
+]

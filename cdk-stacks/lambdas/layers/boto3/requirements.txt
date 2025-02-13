@@ -1,0 +1,3 @@
+boto3==1.34.162
+PyJWT==2.8.0
+strip-markdown==1.3

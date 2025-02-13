@@ -1,0 +1,15 @@
+!jest.config.js
+test/*.js
+bin/*.js
+lib/*.js
+lib/*/*.js
+*.d.ts
+node_modules
+.env
+build_lambda_midway_auth
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
+cdk-outputs.json
+cdk-backend-outputs.json

@@ -1,0 +1,74 @@
+[
+    {
+      "name": "PetroPrime",
+      "prices": {
+        "regular": {
+          "current": 4.59,
+          "cash": 4.54,
+          "lastSaved": 0.05
+        },
+        "mid": {
+          "current": 4.89,
+          "cash": 4.84,
+          "lastSaved": 0.05
+        },
+        "premium": {
+          "current": 5.19,
+          "cash": 5.14,
+          "lastSaved": 0.05
+        }
+      }
+    },
+    {
+      "name": "FuelFlow",
+      "prices": {
+        "regular": {
+          "current": 4.69,
+          "lastSaved": 0.00
+        },
+        "mid": {
+          "current": 4.99,
+          "lastSaved": 0.00
+        },
+        "premium": {
+          "current": 5.29,
+          "lastSaved": 0.00
+        }
+      }
+    },
+    {
+      "name": "OctaneXpress",
+      "prices": {
+        "regular": {
+          "current": 4.75,
+          "lastSaved": 0.10
+        },
+        "mid": {
+          "current": 5.05,
+          "lastSaved": 0.10
+        },
+        "premium": {
+          "current": 5.35,
+          "lastSaved": 0.10
+        }
+      }
+    },
+    {
+      "name": "GasGo",
+      "prices": {
+        "regular": {
+          "current": 4.65,
+          "lastSaved": 0.03
+        },
+        "mid": {
+          "current": 4.95,
+          "lastSaved": 0.03
+        },
+        "premium": {
+          "current": 5.25,
+          "lastSaved": 0.03
+        }
+      }
+    }
+  ]
+  
