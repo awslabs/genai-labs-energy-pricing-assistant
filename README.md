@@ -6,6 +6,7 @@
     - [2. RAG Knowledge Base](#2-rag-knowledge-base)
     - [3. Runtime Chatbot](#3-runtime-chatbot)
   - [End-to-end Architecture](#end-to-end-architecture)
+  - [Demo Script](#demo-script)
   - [Setup](#setup)
     - [Pre-requisites](#pre-requisites)
     - [Run CDK](#run-cdk)
@@ -35,6 +36,10 @@ The runtime chatbot is a React-based website that uses a WebSocket API and a Lam
 ## End-to-end Architecture
 
 ![e2e architecture](docs/architecture_diagrams/end-to-end%20architecture.png)
+
+## Demo Script
+
+The demo script, use case, and persona is provided here: [Demo Script](/docs/demoscript/Analyst_Demoscript.md)
 
 
 ## Setup
