@@ -33,7 +33,7 @@
         "@aws-solutions-constructs/aws-cloudfront-s3": "^2.61.0",
         "@aws-solutions-constructs/aws-lambda-sqs": "^2.61.0",
         "@aws-solutions-constructs/aws-sqs-lambda": "^2.61.0",
-        "aws-cdk-lib": "^2.139.1",
+        "aws-cdk-lib": "^2.185.0",
         "aws-lambda": "^1.0.7",
         "aws-sdk": "^2.1651.0",
         "constructs": "^10.0.0",
