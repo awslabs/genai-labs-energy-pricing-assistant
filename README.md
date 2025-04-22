@@ -46,7 +46,7 @@ The demo script, use case, and persona is provided here: [Demo Script](/docs/dem
 
 ### Pre-requisites
 1. The solution is only available in `us-east-1`. Please choose either of them to proceed.
-2. [Enable models in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html): for this use case, you need to enable Amazon Nova Lite v1, Anthropic Claude Haiku v3 and Titan Embeddings models 
+2. [Enable models in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html): for this use case, you need to enable Amazon Nova Lite v1, Anthropic Claude Haiku v3, Titan Text G1 - Premier, and Titan Embeddings G1 - Text
 3. [Get started with CDK](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html).
 4. [Install Docker](https://www.docker.com/get-started/). Because we are bundling Lambda functions when running CDK so we need to install Docker. Please see the blog post about [Building, bundling and deploying applications with the AWS CDK](https://aws.amazon.com/blogs/devops/building-apps-with-aws-cdk/)
 
