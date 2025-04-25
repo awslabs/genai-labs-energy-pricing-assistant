@@ -93,8 +93,10 @@ export class CdkAgentStack extends cdk.Stack {
     ])
 
     const appName = 'EnergyPricingAssistant'
-    const claudeModel = 'anthropic.claude-3-haiku-20240307-v1:0'
-    const novaModel = 'amazon.nova-lite-v1:0'
+    const claudeModel = 'us.anthropic.claude-3-haiku-20240307-v1:0'
+    const novaModel = 'us.amazon.nova-lite-v1:0'
+    const claudeModelFoundation = 'anthropic.claude-3-haiku-20240307-v1:0'
+    const novaModelFoundation = 'amazon.nova-lite-v1:0'
     const cognitoIdentifier = `energypricingassistant${this.account}`
 
     // Create a User Pool
@@ -419,13 +421,14 @@ export class CdkAgentStack extends cdk.Stack {
             "bedrock:InvokeModel",
             "bedrock:InvokeFlow",
             "bedrock:InvokeModelWithResponseStream",
-            "bedrock:Retrieve"
+            "bedrock:Retrieve",
+            "bedrock:GetInferenceProfile"
           ],
           resources: [
-            `arn:aws:bedrock:${this.region}:${this.account}:provisioned-model/${claudeModel}`,
-            `arn:aws:bedrock:${this.region}::foundation-model/${claudeModel}`,
-            `arn:aws:bedrock:${this.region}:${this.account}:provisioned-model/${novaModel}`,
-            `arn:aws:bedrock:${this.region}::foundation-model/${novaModel}`,
+            `arn:aws:bedrock:*::foundation-model/${claudeModelFoundation}`,
+            `arn:aws:bedrock:*::foundation-model/${novaModelFoundation}`,
+            `arn:aws:bedrock:${this.region}:${this.account}:inference-profile/${claudeModel}`,
+            `arn:aws:bedrock:${this.region}:${this.account}:inference-profile/${novaModel}`,
             `arn:aws:bedrock:${this.region}:${this.account}:knowledge-base/${props.knowledgeBaseId}`,
             `${FLOW_ALIAS_IDENTIFIER}`
           ],

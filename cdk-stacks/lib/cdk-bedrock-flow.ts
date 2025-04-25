@@ -27,8 +27,8 @@ export class CdkBedrockFlowStack extends cdk.NestedStack {
     ])
 
     const appName = 'EnergyPricingAssistant'
-    const claudeModel = 'anthropic.claude-3-haiku-20240307-v1:0'
-    const novaModel = 'amazon.nova-lite-v1:0'
+    const claudeModel = 'us.anthropic.claude-3-haiku-20240307-v1:0'
+    const novaModel = 'us.amazon.nova-lite-v1:0'
 
     const bedrockflowExecuteKbRole = new iam.Role(this, 'BedrockFlowRole', {
       assumedBy: new iam.ServicePrincipal('bedrock.amazonaws.com'),

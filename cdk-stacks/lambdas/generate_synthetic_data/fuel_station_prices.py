@@ -2,6 +2,7 @@ import os
 import json
 from datetime import datetime, timedelta
 from decimal import Decimal
+import time
 import os
 import json
 import boto3
@@ -87,10 +88,10 @@ def put_item(dynamo_table, item_data):
 def generate_fuel_prices():
     # Use the native inference API to send a text message to Anthropic Claude.
     # Create a Bedrock Runtime client in the AWS Region of your choice.
-    client = boto3.client("bedrock-runtime", region_name="us-east-1")
+    client = boto3.client("bedrock-runtime")
 
     # Set the model ID, e.g., Claude 3 Haiku.
-    model_id = "amazon.nova-lite-v1:0"
+    model_id = "us.amazon.nova-lite-v1:0"
     
     stations = load_json_from_file("stations.json")
         
@@ -222,42 +223,48 @@ def generate_ai_recommendations():
     stations = load_json_from_file("stations.json")
         
     for station in stations:
-        station["station"]
+        try:
+            station["station"]
 
-        response = client_runtime.invoke_flow(
-            flowAliasIdentifier=os.environ["FLOW_ALIAS"],
-            flowIdentifier=os.environ["FLOW_IDENTIFIER"],
-            inputs=[
-                {
-                    'content': {
-                        'document': '{"prompttype": "airecommendation", "station": "'+station["station"]+'"}'
+            response = client_runtime.invoke_flow(
+                flowAliasIdentifier=os.environ["FLOW_ALIAS"],
+                flowIdentifier=os.environ["FLOW_IDENTIFIER"],
+                inputs=[
+                    {
+                        'content': {
+                            'document': '{"prompttype": "airecommendation", "station": "'+station["station"]+'"}'
+                        },
+                        'nodeName': 'FlowInputNode',
+                        'nodeOutputName': 'document'
                     },
-                    'nodeName': 'FlowInputNode',
-                    'nodeOutputName': 'document'
-                },
-            ]
-        )
-        
-        result = {}
-        
-        for event in response.get("responseStream"):
-            result.update(event)
-        
-        if result['flowCompletionEvent']['completionReason'] == 'SUCCESS':
-            now = datetime.now()
-            rounded_datetime = now.replace(minute=0, second=0, microsecond=0)
-            # Convert the rounded datetime to a formatted string
-            timestamp = int(rounded_datetime.timestamp())
-            expiration_datetime = int((rounded_datetime + timedelta(days=30)).timestamp())
-            record = {
-                "station": station["station"],
-                "timestamp": timestamp,
-                "expirationtime": expiration_datetime,
-                "message": result['flowOutputEvent']['content']['document']
-            }
+                ]
+            )
             
-            ## Store AI Recommendation in Dynamo DB
-            put_item(ai_table, record)
-        
-        else:
-            print("The prompt flow invocation completed because of the following reason:", result['flowCompletionEvent']['completionReason'])
+            result = {}
+            
+            for event in response.get("responseStream"):
+                result.update(event)
+            
+            if result['flowCompletionEvent']['completionReason'] == 'SUCCESS':
+                now = datetime.now()
+                rounded_datetime = now.replace(minute=0, second=0, microsecond=0)
+                # Convert the rounded datetime to a formatted string
+                timestamp = int(rounded_datetime.timestamp())
+                expiration_datetime = int((rounded_datetime + timedelta(days=30)).timestamp())
+                record = {
+                    "station": station["station"],
+                    "timestamp": timestamp,
+                    "expirationtime": expiration_datetime,
+                    "message": result['flowOutputEvent']['content']['document']
+                }
+                
+                ## Store AI Recommendation in Dynamo DB
+                put_item(ai_table, record)
+            
+            else:
+                print("The prompt flow invocation completed because of the following reason:", result['flowCompletionEvent']['completionReason'])
+            
+            time.sleep(10)
+        except:
+            print("Error while generating AI Recommendations for: " + station["station"] + ". Waiting 30 seconds due to throttling.")
+            time.sleep(30)
