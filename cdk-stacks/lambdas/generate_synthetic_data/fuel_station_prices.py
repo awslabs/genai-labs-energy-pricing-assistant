@@ -110,6 +110,8 @@ def generate_fuel_prices():
             # Calculate the number of days to create based on the last record timestamp
             last_record_date = datetime.fromtimestamp(int(last_record_timestamp))
             days_to_create = (datetime.now() - last_record_date).days
+            if days_to_create > 5:
+                days_to_create = 5
             print(f"Generating {days_to_create} days of historical data.")
         else:
             # No previous records, so create data for the last 5 days
