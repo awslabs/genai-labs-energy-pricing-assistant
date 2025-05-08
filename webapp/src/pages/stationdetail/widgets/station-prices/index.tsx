@@ -131,6 +131,9 @@ export default function StationPricesContent(props: StationPricesProps) {
           data: stationPricesData.map(datum => ({ x: datum.date, y: datum['This Station'] })),
         },
       ];
+
+      // Sort the data chronologically first
+      stationPricesData.sort((a, b) => a.date.getTime() - b.date.getTime());
       
       const stationPricesDomain = [
         stationPricesData[0].date,
