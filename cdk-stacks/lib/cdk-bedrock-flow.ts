@@ -3,7 +3,7 @@ import { Construct } from 'constructs';
 import { aws_bedrock as bedrock } from 'aws-cdk-lib';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import { NagSuppressions } from 'cdk-nag';
-
+import { bedrock as bedrockconstructs } from '@cdklabs/generative-ai-cdk-constructs';
 
 export interface CdkBedrockFlowProps extends cdk.NestedStackProps {
   readonly knowledgeBaseId: string;
@@ -27,8 +27,16 @@ export class CdkBedrockFlowStack extends cdk.NestedStack {
     ])
 
     const appName = 'EnergyPricingAssistant'
-    const claudeModel = 'us.anthropic.claude-3-haiku-20240307-v1:0'
-    const novaModel = 'us.amazon.nova-lite-v1:0'
+
+    const novaModel = bedrockconstructs.CrossRegionInferenceProfile.fromConfig({
+      geoRegion: bedrockconstructs.CrossRegionInferenceProfileRegion.US,
+      model: bedrockconstructs.BedrockFoundationModel.AMAZON_NOVA_LITE_V1,
+    });
+
+    const claudeModel = bedrockconstructs.CrossRegionInferenceProfile.fromConfig({
+      geoRegion: bedrockconstructs.CrossRegionInferenceProfileRegion.US,
+      model: bedrockconstructs.BedrockFoundationModel.ANTHROPIC_CLAUDE_HAIKU_V1_0,
+    });
 
     const bedrockflowExecuteKbRole = new iam.Role(this, 'BedrockFlowRole', {
       assumedBy: new iam.ServicePrincipal('bedrock.amazonaws.com'),
@@ -45,7 +53,7 @@ export class CdkBedrockFlowStack extends cdk.NestedStack {
             'aws:SourceAccount': this.account,
           },
           'ArnLike': {
-            'aws:SourceArn': `arn:aws:bedrock:us-east-1:${this.account}:flow/*`,
+            'aws:SourceArn': `arn:aws:bedrock:${this.region}:${this.account}:flow/*`,
           },
         },
       })
@@ -284,7 +292,7 @@ export class CdkBedrockFlowStack extends cdk.NestedStack {
           },
           {
             configuration: {
-              "knowledgeBase": { "knowledgeBaseId": props.knowledgeBaseId, modelId: claudeModel }
+              "knowledgeBase": { "knowledgeBaseId": props.knowledgeBaseId, modelId: claudeModel.inferenceProfileArn }
             },
             inputs: [{ expression: "$.data", name: "retrievalQuery", type: "String" }],
             name: "PricingStrategyKnowledgeBase",
@@ -300,7 +308,7 @@ export class CdkBedrockFlowStack extends cdk.NestedStack {
                     inferenceConfiguration: {
                       text: { maxTokens: 2000, temperature: 0.5, topP: 0.5 }
                     },
-                    modelId: novaModel,
+                    modelId: novaModel.inferenceProfileArn,
                     templateConfiguration: {
                       text: {
                         inputVariables: [{ name: "historicaldata" }, { name: "weather" }, { name: "strategy" }],
@@ -346,7 +354,7 @@ export class CdkBedrockFlowStack extends cdk.NestedStack {
                       text: { maxTokens: 1000, temperature: 0.5, topP: 0.5 }
 
                     },
-                    modelId: claudeModel,
+                    modelId: claudeModel.inferenceProfileArn,
                     templateConfiguration: {
                       text: {
                         inputVariables: [{ name: "input" }],
@@ -417,7 +425,7 @@ export class CdkBedrockFlowStack extends cdk.NestedStack {
                       }
 
                     },
-                    modelId: novaModel,
+                    modelId: novaModel.inferenceProfileArn,
                     templateConfiguration: {
                       text: {
                         inputVariables: [{ name: "input" }],
@@ -464,7 +472,7 @@ export class CdkBedrockFlowStack extends cdk.NestedStack {
                     inferenceConfiguration: {
                       text: { maxTokens: 1000, temperature: 0.5, topP: 0.5 }
                     },
-                    modelId: novaModel,
+                    modelId: novaModel.inferenceProfileArn,
                     templateConfiguration: {
                       text: {
                         inputVariables: [{ name: "historicaldata" }, { name: "weather" }, { name: "strategy" }],

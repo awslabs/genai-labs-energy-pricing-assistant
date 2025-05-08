@@ -24,8 +24,7 @@ import * as events from "aws-cdk-lib/aws-events";
 import * as targets from "aws-cdk-lib/aws-events-targets";
 import * as waf from 'aws-cdk-lib/aws-wafv2';
 import { CdkBedrockFlowStack } from '../lib/cdk-bedrock-flow'
-
-const SSM_COGNITO_PARAM_PATH = 'cognitoConfig'
+import { bedrock as bedrockconstructs } from '@cdklabs/generative-ai-cdk-constructs';
 
 export interface CdkAgentStackProps extends cdk.StackProps {
   readonly knowledgeBaseId: string;
@@ -93,10 +92,16 @@ export class CdkAgentStack extends cdk.Stack {
     ])
 
     const appName = 'EnergyPricingAssistant'
-    const claudeModel = 'us.anthropic.claude-3-haiku-20240307-v1:0'
-    const novaModel = 'us.amazon.nova-lite-v1:0'
-    const claudeModelFoundation = 'anthropic.claude-3-haiku-20240307-v1:0'
-    const novaModelFoundation = 'amazon.nova-lite-v1:0'
+    const novaModel = bedrockconstructs.CrossRegionInferenceProfile.fromConfig({
+      geoRegion: bedrockconstructs.CrossRegionInferenceProfileRegion.US,
+      model: bedrockconstructs.BedrockFoundationModel.AMAZON_NOVA_LITE_V1,
+    }).inferenceProfileId
+    const claudeModel = bedrockconstructs.CrossRegionInferenceProfile.fromConfig({
+      geoRegion: bedrockconstructs.CrossRegionInferenceProfileRegion.US,
+      model: bedrockconstructs.BedrockFoundationModel.ANTHROPIC_CLAUDE_HAIKU_V1_0,
+    }).inferenceProfileId
+    const claudeModelFoundation = bedrockconstructs.BedrockFoundationModel.ANTHROPIC_CLAUDE_HAIKU_V1_0.modelId
+    const novaModelFoundation = bedrockconstructs.BedrockFoundationModel.AMAZON_NOVA_LITE_V1.modelId
     const cognitoIdentifier = `energypricingassistant${this.account}`
 
     // Create a User Pool
@@ -466,7 +471,8 @@ export class CdkAgentStack extends cdk.Stack {
         DYNAMODB_PRICES_TABLE_NAME: dynamodbSyntheticStationData.tableName,
         DYNAMODB_STATIONS_TABLE_NAME: dynamodbFuelStations.tableName,
         FLOW_ALIAS: FLOW_ALIAS_IDENTIFIER,
-        FLOW_IDENTIFIER: FLOW_IDENTIFIER
+        FLOW_IDENTIFIER: FLOW_IDENTIFIER,
+        MODEL_ID: novaModel
       },
     });
     lambdaFnGenerateData.role?.attachInlinePolicy(customBedrockPolicy);

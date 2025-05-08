@@ -91,7 +91,7 @@ def generate_fuel_prices():
     client = boto3.client("bedrock-runtime")
 
     # Set the model ID, e.g., Claude 3 Haiku.
-    model_id = "us.amazon.nova-lite-v1:0"
+    model_id = os.environ['MODEL_ID']
     
     stations = load_json_from_file("stations.json")
         
