@@ -68,7 +68,8 @@ export class CdkBedrockFlowStack extends cdk.NestedStack {
           "bedrock:InvokeModelWithResponseStream",
           "bedrock:Retrieve",
           "bedrock:RetrieveAndGenerate",
-          "lambda:InvokeFunction"
+          "bedrock:GetInferenceProfile",
+          "lambda:InvokeFunction",
         ],
         resources: ["*"],
       })
